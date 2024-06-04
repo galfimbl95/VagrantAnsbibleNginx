@@ -1,0 +1,16 @@
+- name: "Install zabbix-agent via apt"
+  ansible.builtin.apt:
+    name: "zabbix-agent"
+    state: "latest"
+    update_cache: false
+
+- name: "Add Zabbix server address to config"
+  ansible.builtin.replace:
+    path: /etc/zabbix/zabbix_agentd.conf
+    regexp: 'Server=127.0.0.1'
+    replace: 'Server=127.0.0.1,192.168.56.40'
+
+- name: "Reload zabbix-agent"
+  ansible.builtin.systemd_service:
+    name: zabbix-agent
+    state: restarted

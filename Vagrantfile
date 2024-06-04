@@ -12,10 +12,6 @@ Vagrant.configure("2") do |nginxsrv|
         # Создание пользователя user
         useradd -d /home/user/ -m -G sudo user
 
-        # Наводим красоту, чтобы работали автокомплиты, алиасы и т.д.
-        # cp /home/vagrant/.bashrc /home/user/.bashrc
-        # cp /home/vagrant/.profile /home/user/.profile
-
         # Копирование ssh ключа с хоста в виртуальную машину
         mkdir /home/user/.ssh/
         chmod 0700 /home/user/.ssh/
