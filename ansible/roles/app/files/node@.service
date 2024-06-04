@@ -1,0 +1,13 @@
+[Unit]
+Description=NodeJS Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/node ./index.js
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+WorkingDirectory=/var/www/%i
+
+[Install]
+WantedBy=multi-user.target

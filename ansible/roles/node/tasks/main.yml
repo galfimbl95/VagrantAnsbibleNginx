@@ -1,0 +1,11 @@
+- name: "Install nodejs via apt"
+  ansible.builtin.apt:
+    name: "nodejs"
+    state: "latest"
+    update_cache: true
+
+- name: "Install npm via apt"
+  ansible.builtin.apt:
+    name: "npm"
+    state: "latest"
+    update_cache: false

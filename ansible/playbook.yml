@@ -1,0 +1,24 @@
+- hosts: "all" # применяем команды ко всем хостам из inventory
+  become: true # становимся привилегированным пользователем
+  roles: 
+  - node
+  - nginx
+  - app
+  
+  tasks:
+  - name: Install packages based on package.json.
+    community.general.npm:
+      path: /var/www/app
+
+  - name: "Enable node app daemon"
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+      name: node@app
+      enabled: true
+      state: started
+      masked: no
+
+  - name: "Reload nginx"
+    ansible.builtin.service:
+      name: "nginx"
+      state: "reloaded"

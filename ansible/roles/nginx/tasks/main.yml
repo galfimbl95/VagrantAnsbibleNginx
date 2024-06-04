@@ -1,0 +1,13 @@
+- name: "Install nginx via apt" # имя, обязательно для любой таски из плейбука, должно содержать описание того что эта таска делает
+  ansible.builtin.apt: # имя модуля, этот модуль устанавливает софт на хосте с помощью пакета apt
+    name: "nginx" # имя пакета для установки
+    state: "latest" # установить последнюю версию пакета, в отличие от present, если пакет уже установлен в системе, попробует его обновить
+    update_cache: true # вызвать apt update перед установкой, чтобы убедиться в наличии самой свежей базы данных о пакетах
+
+- name: "Copy nginx config"
+  ansible.builtin.copy:
+    src: "files/nginx.conf"
+    dest: "/etc/nginx/sites-available/default"
+    owner: "user"
+    group: "user"
+    mode: "0644"
